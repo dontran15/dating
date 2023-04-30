@@ -98,7 +98,7 @@ public class PersonApiController {
 
         Date dob;
 
-        if (personRepository.findByEmail(email) != null) {
+        if (personRepository.findByEmail(email) == null) {
             return new ResponseEntity<>(email + " already exists, please make a new one", HttpStatus.BAD_REQUEST);
         }
 
