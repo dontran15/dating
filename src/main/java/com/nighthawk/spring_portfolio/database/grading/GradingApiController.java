@@ -43,7 +43,7 @@ public class GradingApiController {
     /*
      * GET List of Grades by Person
      */
-    @GetMapping("/grades")
+    @PostMapping("/grades")
     public ResponseEntity<Object> getGrades(@RequestBody final Map<String, Object> map) {
 
         String email = (String) map.get("email");
@@ -252,7 +252,7 @@ public class GradingApiController {
      * GET List of Grades by Assignment
      * Lists statuses as well in checks HashMap
      */
-    @GetMapping("/assignmentGrades")
+    @PostMapping("/assignmentGrades")
     public ResponseEntity<Object> getGradesByAssignment(@RequestBody final Map<String, Object> map) {
 
         String assignmentString = (String) map.get("assignment");
