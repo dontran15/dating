@@ -157,9 +157,9 @@ public class ProblemApiController {
         double score = Double.valueOf(scoreString);
 
         ProblemSet problemSet = problemSetJpaRepository.findByName(problemSetName);
-        Optional<Person> person = personJpaRepository.findByEmail(email);
+        Person person = personJpaRepository.findByEmail(email);
 
-        if (problemSet == null || person.get() == null) {
+        if (problemSet == null || person == null) {
             return new ResponseEntity<>("problem set/person doesn't exist", HttpStatus.BAD_REQUEST);
         }
 
@@ -170,7 +170,7 @@ public class ProblemApiController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        Grade grade = gradeJpaRepository.findByPersonAndAssignment(person.get(), assignment);
+        Grade grade = gradeJpaRepository.findByPersonAndAssignment(person, assignment);
 
         if (grade == null) {
             return new ResponseEntity<>("grade doesn't exist", HttpStatus.BAD_REQUEST);

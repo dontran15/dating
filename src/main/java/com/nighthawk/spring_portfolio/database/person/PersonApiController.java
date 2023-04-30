@@ -98,7 +98,8 @@ public class PersonApiController {
 
         Date dob;
 
-        if (personRepository.findByEmail(email) == null) {
+        Person personTest = personRepository.findByEmail(email);
+        if (personRepository.findByEmail(email) != null) {
             return new ResponseEntity<>(email + " already exists, please make a new one", HttpStatus.BAD_REQUEST);
         }
 
@@ -142,20 +143,29 @@ public class PersonApiController {
 
     @GetMapping("/getPersonRoles")
     public ResponseEntity<?> getPersonRoles(@RequestParam("email") String email) {
-        Optional<Person> person = personRepository.findByEmail(email);
-        return new ResponseEntity<>(person.get().getRoles(), HttpStatus.OK);
+        Person person = personRepository.findByEmail(email);
+        if (person == null) {
+            return new ResponseEntity<>("person not found", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(person.getRoles(), HttpStatus.OK);
     }
 
     @GetMapping("/getPersonName")
     public ResponseEntity<?> getPersonName(@RequestParam("email") String email) {
-        Optional<Person> person = personRepository.findByEmail(email);
-        return new ResponseEntity<>(person.get().getName(), HttpStatus.OK);
+        Person person = personRepository.findByEmail(email);
+        if (person == null) {
+            return new ResponseEntity<>("person not found", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(person.getName(), HttpStatus.OK);
     }
 
     @GetMapping("/getPersonAge")
     public ResponseEntity<?> getPersonAge(@RequestParam("email") String email) {
-        Optional<Person> person = personRepository.findByEmail(email);
-        return new ResponseEntity<>(person.get().getAge(), HttpStatus.OK);
+        Person person = personRepository.findByEmail(email);
+        if (person == null) {
+            return new ResponseEntity<>("person not found", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(person.getAge(), HttpStatus.OK);
     }
 
     // Method to call addCarToPersonCarList from ModelRepository to add a car to a
