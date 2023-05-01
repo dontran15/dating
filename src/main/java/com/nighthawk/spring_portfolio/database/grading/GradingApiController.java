@@ -267,4 +267,29 @@ public class GradingApiController {
         return new ResponseEntity<>(gradeRepository.findAllByAssignment(assignment), HttpStatus.OK);
     }
 
+    @PostMapping("/submitHW")
+    public ResponseEntity<Object> submitHomework(@RequestBody final Map<String, Object> map) {
+        String email = (String) map.get("email");
+        String assignmentName = (String) map.get("assignment");
+        String link = (String) map.get("link");
+
+        Person person = personRepository.findByEmail(email);
+        Assignment assignment = assignmentRepository.findByName(assignmentName);
+
+        if (person == null || assignment == null) {
+            return new ResponseEntity<>("person/assignment does not exist", HttpStatus.BAD_REQUEST);
+        }
+
+        Grade grade = gradeRepository.findByPersonAndAssignment(person, assignment);
+
+        if (grade == null) {
+            return new ResponseEntity<>("grade does not exist", HttpStatus.BAD_REQUEST);
+        }
+
+        grade.setLink(link);
+        gradeRepository.save(grade);
+
+        return new ResponseEntity<>(("Successfully updated grade for " + assignmentName + " for " + email),
+                HttpStatus.OK);
+    }
 }

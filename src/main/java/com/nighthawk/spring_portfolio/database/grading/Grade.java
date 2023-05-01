@@ -45,6 +45,7 @@ public class Grade {
 
     private double points;
     private String comment;
+    private String link;
 
     @NotNull
     private HashMap<String, Boolean> checks = new HashMap<String, Boolean>();
@@ -79,5 +80,9 @@ public class Grade {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }
