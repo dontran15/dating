@@ -4,8 +4,6 @@ import com.nighthawk.spring_portfolio.database.person.Person;
 import com.nighthawk.spring_portfolio.database.person.PersonJpaRepository;
 import com.nighthawk.spring_portfolio.database.role.Role;
 import com.nighthawk.spring_portfolio.database.role.RoleJpaRepository;
-import com.nighthawk.spring_portfolio.database.car.Car;
-import com.nighthawk.spring_portfolio.database.car.CarJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +21,12 @@ import java.util.List;
 import java.util.Optional;
 
 /*
+ * 
+ * NOTE DEPRECATED FOR OUR USES
+ * 
+ */
+
+/*
 This class has an instance of Java Persistence API (JPA)
 -- @Autowired annotation. Allows Spring to resolve and inject collaborating beans into our bean.
 -- Spring Data JPA will generate a proxy instance
@@ -36,8 +40,6 @@ public class ModelRepository implements UserDetailsService { // "implements" tie
     private PersonJpaRepository personJpaRepository;
     @Autowired // Inject RoleJpaRepository
     private RoleJpaRepository roleJpaRepository;
-    @Autowired // Inject CarJpaRepository
-    private CarJpaRepository carJpaRepository;
 
     // Setup Password style for Database storing and lookup
     @Autowired // Inject PasswordEncoder
@@ -158,45 +160,4 @@ public class ModelRepository implements UserDetailsService { // "implements" tie
             }
         }
     }
-
-    /* Car Section */
-
-    public void saveCar(Car car) {
-        carJpaRepository.save(car);
-    }
-
-    public List<Car> listAllCars() {
-        return carJpaRepository.findAll();
-    }
-
-    public Car findCar(String carName) {
-        return carJpaRepository.findByName(carName);
-    }
-
-    public Car getCar(long id) {
-        return (carJpaRepository.findById(id).isPresent())
-                ? carJpaRepository.findById(id).get()
-                : null;
-    }
-
-    public void deleteCar(long id) {
-        carJpaRepository.deleteById(id);
-    }
-
-    // public void updateCar(long id, Car car){
-    // carJpaRepository.save(car);
-    // }
-
-    // public void deleteCarFromPersonCarList(String email, String carName) {
-    // Person person = personJpaRepository.findByEmail(email);
-    // if (person != null) { // verify person
-    // Car car = carJpaRepository.findByName(carName);
-    // if (car != null) { // verify car
-    // if (person.getCarList().contains(car)) {
-    // person.getCarList().remove(car);
-    // }
-    // }
-    // }
-    // }
-
 }
