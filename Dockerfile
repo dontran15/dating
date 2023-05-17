@@ -9,4 +9,4 @@ RUN ./mvnw install -Dspring-boot.repackage.skip=true
 COPY . .
 RUN ./mvnw package
 CMD ["java", "-jar", "target/spring-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8022
+EXPOSE 8040
