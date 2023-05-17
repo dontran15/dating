@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.nighthawk.spring_portfolio.database.ModelRepository;
-import com.nighthawk.spring_portfolio.database.grading.Assignment;
-import com.nighthawk.spring_portfolio.database.grading.AssignmentJpaRepository;
-import com.nighthawk.spring_portfolio.database.grading.Grade;
-import com.nighthawk.spring_portfolio.database.grading.GradeJpaRepository;
+import com.nighthawk.spring_portfolio.database.dating.Assignment;
+import com.nighthawk.spring_portfolio.database.dating.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.database.dating.Grade;
+import com.nighthawk.spring_portfolio.database.dating.GradeJpaRepository;
 import com.nighthawk.spring_portfolio.database.role.RoleJpaRepository;
 
 import java.util.*;

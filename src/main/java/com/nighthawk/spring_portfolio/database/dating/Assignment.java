@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.database.grading;
+package com.nighthawk.spring_portfolio.database.dating;
 
 import java.util.Date;
 import java.util.HashMap;
