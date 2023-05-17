@@ -10,6 +10,7 @@ public interface DatingProfileJpaRepository extends JpaRepository<DatingProfile,
 
     Optional<DatingProfile> findByEmail(String email);
     Optional<DatingProfile> findByName(String name);
+    Optional<List<DatingProfile>> findAllByOrderByNameAsc();
 
     @Query(value = "SELECT * FROM DatingProfile d WHERE d.name LIKE ?1 or d.email LIKE ?1", nativeQuery = true)
     List<DatingProfile> findByLikeTermNative(String term);
