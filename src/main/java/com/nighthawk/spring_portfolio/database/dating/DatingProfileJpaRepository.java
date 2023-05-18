@@ -14,5 +14,8 @@ public interface DatingProfileJpaRepository extends JpaRepository<DatingProfile,
 
     @Query(value = "SELECT * FROM DatingProfile d WHERE d.name LIKE ?1 or d.email LIKE ?1", nativeQuery = true)
     List<DatingProfile> findByLikeTermNative(String term);
+
+    @Query(value = "SELECT * FROM DatingProfile d WHERE d.interests LIKE ?1", nativeQuery = true)
+    List<DatingProfile> findByLikeInterestsNative(String term);
     
 }
