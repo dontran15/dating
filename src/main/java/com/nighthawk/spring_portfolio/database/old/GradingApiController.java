@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.database.dating;
+package com.nighthawk.spring_portfolio.database.old;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

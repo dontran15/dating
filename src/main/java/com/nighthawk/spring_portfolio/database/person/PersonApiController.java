@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.nighthawk.spring_portfolio.database.ModelRepository;
-import com.nighthawk.spring_portfolio.database.dating.Assignment;
-import com.nighthawk.spring_portfolio.database.dating.AssignmentJpaRepository;
-import com.nighthawk.spring_portfolio.database.dating.Grade;
-import com.nighthawk.spring_portfolio.database.dating.GradeJpaRepository;
 import com.nighthawk.spring_portfolio.database.role.RoleJpaRepository;
+
+import com.nighthawk.spring_portfolio.database.old.Assignment;
+import com.nighthawk.spring_portfolio.database.old.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.database.old.Grade;
+import com.nighthawk.spring_portfolio.database.old.GradeJpaRepository;
 
 import java.util.*;
 
@@ -124,23 +125,6 @@ public class PersonApiController {
         return new ResponseEntity<>(email + " is created successfully", HttpStatus.CREATED);
     }
 
-    /*
-     * The personSearch API looks across database for partial match to term (k,v)
-     * passed by RequestEntity body
-     */
-    // @PostMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Object> personSearch(@RequestBody final Map<String,
-    // String> map) {
-    // // extract term from RequestEntity
-    // String term = (String) map.get("term");
-
-    // // custom JPA query to filter on term
-    // List<Person> list = personRepository.listLikeNative(term);
-
-    // // return resulting list and status, error checking should be added
-    // return new ResponseEntity<>(list, HttpStatus.OK);
-    // }
-
     @GetMapping("/getPersonRoles")
     public ResponseEntity<?> getPersonRoles(@RequestParam("email") String email) {
         Person person = personRepository.findByEmail(email);
@@ -167,30 +151,4 @@ public class PersonApiController {
         }
         return new ResponseEntity<>(person.getAge(), HttpStatus.OK);
     }
-
-    // Method to call addCarToPersonCarList from ModelRepository to add a car to a
-    // person's car list, taking email and car name as parameters from URI
-    // @PostMapping(value = "/addCar", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Object> addCarToPersonCarList(@RequestParam("email")
-    // String email,
-    // @RequestParam("carName") String carName) {
-    // // custom JPA query to filter on term
-    // repository.addCarToPersonCarList(email, carName);
-
-    // // return resulting list and status
-    // return new ResponseEntity<>("Car added to person's car list", HttpStatus.OK);
-    // }
-
-    // @GetMapping(value = "/deleteCar", produces =
-    // MediaType.APPLICATION_JSON_VALUE)
-    // public RedirectView deleteCarFromPersonCarList(@RequestParam("email") String
-    // email,
-    // @RequestParam("carName") String carName) {
-    // repository.deleteCarFromPersonCarList(email, carName);
-
-    // return new
-    // RedirectView("https://ad1616.github.io/breadbops-frontend/carlist");
-
-    // }
-
 }
