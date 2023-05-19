@@ -24,18 +24,9 @@ public class Personality extends ProfileType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "datingProfile_id")
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private DatingProfile datingProfile;
-
     public final Type type = Type.PERSONALITY;
 
     public String jsonString() {
         return "";
-    }
-
-    public Personality(DatingProfile datingProfile) {
-        super();
-        this.datingProfile = datingProfile;
     }
 }

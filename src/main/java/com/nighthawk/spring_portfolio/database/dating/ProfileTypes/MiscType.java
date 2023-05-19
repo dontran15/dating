@@ -27,18 +27,9 @@ public class MiscType extends ProfileType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "datingProfile_id")
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private DatingProfile datingProfile;
-
     public final Type type = Type.MISC;
 
     public String jsonString() {
         return "";
-    }
-
-    public MiscType(DatingProfile datingProfile) {
-        super();
-        this.datingProfile = datingProfile;
     }
 }

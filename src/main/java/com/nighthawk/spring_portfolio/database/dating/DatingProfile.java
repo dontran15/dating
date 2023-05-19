@@ -9,6 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.nighthawk.spring_portfolio.database.dating.ProfileTypes.Interest;
+import com.nighthawk.spring_portfolio.database.dating.ProfileTypes.Lifestyle;
+import com.nighthawk.spring_portfolio.database.dating.ProfileTypes.MiscType;
+import com.nighthawk.spring_portfolio.database.dating.ProfileTypes.Personality;
 import com.nighthawk.spring_portfolio.database.person.Person;
 
 import lombok.AllArgsConstructor;
@@ -27,15 +31,15 @@ public class DatingProfile {
 
     private Person person;
 
-    // personal profile
-    private Map<String, String> profile = new HashMap<>();
+    // profile (NOTE: still deciding whether to consider sentiment analysis or
+    // making own algorithm for "pairings", probably don't need either)
+    private ArrayList<Personality> personality = new ArrayList<>();
 
-    // preference for profile ** (NOTE: not sure if we need this)
-    private Map<String, String> interests = new HashMap<>();
+    private ArrayList<Lifestyle> lifestyle = new ArrayList<>();
 
-    private static String[] types = { "personality1", "personality2", "personality3", "lifestyle1", "lifestyle2",
-            "lifestyle3", "song", "food", "quote", "movie", "ethnicity", "school", "job", "interest1", "interest2",
-            "interest3" };
+    private ArrayList<Interest> interest = new ArrayList<>();
+
+    private ArrayList<MiscType> miscType = new ArrayList<>();
 
     public DatingProfile(Person person) {
         this.person = person;
