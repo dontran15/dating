@@ -11,11 +11,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.nighthawk.spring_portfolio.database.ModelRepository;
 import com.nighthawk.spring_portfolio.database.role.RoleJpaRepository;
 
-import com.nighthawk.spring_portfolio.database.old.Assignment;
-import com.nighthawk.spring_portfolio.database.old.AssignmentJpaRepository;
-import com.nighthawk.spring_portfolio.database.old.Grade;
-import com.nighthawk.spring_portfolio.database.old.GradeJpaRepository;
-
 import java.util.*;
 
 import java.text.SimpleDateFormat;
@@ -38,12 +33,6 @@ public class PersonApiController {
     // there
     @Autowired
     private PersonJpaRepository personRepository;
-
-    @Autowired
-    private AssignmentJpaRepository assignmentRepository;
-
-    @Autowired
-    private GradeJpaRepository gradeRepository;
 
     /*
      * GET List of People
@@ -74,12 +63,6 @@ public class PersonApiController {
         Person person = personRepository.findById(id).orElse(null);
         if (person == null) {
             return new ResponseEntity<>("person not found", HttpStatus.OK);
-        }
-
-        List<Grade> grades = gradeRepository.findAllByPerson(person);
-
-        for (Grade grade : grades) {
-            gradeRepository.delete(grade);
         }
 
         personRepository.delete(person);
@@ -114,13 +97,6 @@ public class PersonApiController {
         // student
         Person person = new Person(email, password, name, dob, repository.findRole("ROLE_USER"));
         repository.save(person);
-
-        List<Assignment> assignments = assignmentRepository.findAllByOrderByIdAsc();
-
-        for (Assignment assignment : assignments) {
-            Grade grade = new Grade(assignment, person);
-            gradeRepository.save(grade);
-        }
 
         return new ResponseEntity<>(email + " is created successfully", HttpStatus.CREATED);
     }

@@ -1,25 +1,13 @@
 package com.nighthawk.spring_portfolio.database.dating;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.nighthawk.spring_portfolio.database.person.Person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Eager;
 
 @Data
 @NoArgsConstructor
@@ -31,21 +19,43 @@ public class ProfileDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "person_id")
-    @OneToOne(cascade = CascadeType.ALL)
-    private Person person;
-
-    // profile (NOTE: still deciding whether to consider sentiment analysis or
-    // making own algorithm for "pairings", probably don't need either)
-    @JoinColumn(name = "profileDetail_id")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private ArrayList<ProfileDetail> profileDetail = new ArrayList<>();
-
-    public ProfileDetail(Person person) {
-        this.person = person;
-        initializeProfile();
+    protected enum Type {
+        PERSONALITY, LIFESTYLE, INTEREST, MISC
     }
 
-    private void initializeProfile() {
+    private Type type;
+
+    private String detail;
+
+    public String getDetail() {
+        return this.detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    // TODO: Format as JSON to send for training
+    public String toString() {
+        return "";
+    }
+
+    public ProfileDetail(String type) {
+        this.detail = null;
+
+        switch (type) {
+            case "personality":
+                this.type = Type.PERSONALITY;
+                break;
+            case "interest":
+                this.type = Type.INTEREST;
+                break;
+            case "lifestyle":
+                this.type = Type.LIFESTYLE;
+                break;
+            default:
+                this.type = Type.MISC;
+                break;
+        }
     }
 }
