@@ -31,6 +31,8 @@ public class MiscType extends ProfileType {
     @ManyToOne(cascade = CascadeType.MERGE)
     private DatingProfile datingProfile;
 
+    public final Type type = Type.MISC;
+
     public String jsonString() {
         return "";
     }

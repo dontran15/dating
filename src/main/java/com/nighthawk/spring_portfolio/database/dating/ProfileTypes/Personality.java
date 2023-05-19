@@ -28,6 +28,8 @@ public class Personality extends ProfileType {
     @ManyToOne(cascade = CascadeType.MERGE)
     private DatingProfile datingProfile;
 
+    public final Type type = Type.PERSONALITY;
+
     public String jsonString() {
         return "";
     }

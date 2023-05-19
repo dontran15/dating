@@ -28,6 +28,8 @@ public class Lifestyle extends ProfileType {
     @ManyToOne(cascade = CascadeType.MERGE)
     private DatingProfile datingProfile;
 
+    public final Type type = Type.LIFESTYLE;
+
     public String jsonString() {
         return "";
     }
