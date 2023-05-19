@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.nighthawk.spring_portfolio.database.dating.DatingProfile;
 import com.nighthawk.spring_portfolio.database.person.Person;
 
 import lombok.AllArgsConstructor;
@@ -19,4 +20,15 @@ public class Personality extends ProfileType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private DatingProfile datingProfile;
+
+    public String jsonString() {
+        return "";
+    }
+
+    public Personality(DatingProfile datingProfile) {
+        super();
+        this.datingProfile = datingProfile;
+    }
 }

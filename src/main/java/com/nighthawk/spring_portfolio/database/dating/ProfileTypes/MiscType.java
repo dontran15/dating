@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 import com.nighthawk.spring_portfolio.database.dating.DatingProfile;
 import com.nighthawk.spring_portfolio.database.person.Person;
@@ -16,7 +18,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Lifestyle extends ProfileType {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class MiscType extends ProfileType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,7 +30,7 @@ public class Lifestyle extends ProfileType {
         return "";
     }
 
-    public Lifestyle(DatingProfile datingProfile) {
+    public MiscType(DatingProfile datingProfile) {
         super();
         this.datingProfile = datingProfile;
     }
