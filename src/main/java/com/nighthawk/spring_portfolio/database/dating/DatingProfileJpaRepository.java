@@ -21,6 +21,7 @@ public interface DatingProfileJpaRepository extends JpaRepository<DatingProfile,
     List<DatingProfile> findByLikeInterestsNative(ArrayList<String> interests);
 
     // Fix this stuff
-    @Query(value = "SELECT * FROM DatingProfile d WHERE SELECT * FROM d.interests ", nativeQuery = true)
-    List<DatingProfile> findByLikeInterest(String interest);
+    // Nah it's probably fine
+    // @Query(value = "SELECT * FROM DatingProfile d WHERE SELECT * FROM d.interests ", nativeQuery = true)
+    // List<DatingProfile> findByLikeInterest(String interest);
 }
