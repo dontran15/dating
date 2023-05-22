@@ -19,7 +19,7 @@ public class ChatGPT {
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
         data.put("prompt", text);
-        data.pout("max_tokens", 4000);
+        data.put("max_tokens", 4000);
         data.put("temperature", 1.0);
 
         con.setDoOutput(true);
@@ -37,9 +37,7 @@ public class ChatGPT {
 
      
 
-    public static Object generateMultiple(String prompt, int responses) {
-        return null;
-    }   con.setRequestMethod("POST");
+        con.setRequestMethod("POST");
         con.setRequestMethod("Content-Type", "application/json");
         con.setRequestMethod("Authorization", "Bearer " + (String) env.secret);
 
@@ -59,11 +57,11 @@ public class ChatGPT {
     }
 
     public static ArrayList<String> generateMultiple(String prompt, int responses) {
-        ArrayList<String> responses = new ArrayList<String>();
+        ArrayList<String> response = new ArrayList<String>();
         for (int i = 0; i < responses; i++) {
-            responses.add(chatGPT(prompt));
+            response.add(chatGPT(prompt));
         }
-        return responses;
+        return response;
     }
 
     public static void main(String[] args) throws Exception {
