@@ -105,10 +105,10 @@ public class PersonApiController {
             return new ResponseEntity<>(dobString + " error; try MM-dd-yyyy", HttpStatus.BAD_REQUEST);
         }
 
-        // A person object WITHOUT ID will create a new record with default roles as
-        // student
         Person person = new Person(email, password, name, dob, repository.findRole("ROLE_USER"));
         repository.save(person);
+
+        DatingProfile profile = new DatingProfile(person);
 
         return new ResponseEntity<>(email + " is created successfully", HttpStatus.CREATED);
     }

@@ -39,9 +39,19 @@ public class DatingProfile {
     // making own algorithm for "pairings", probably don't need either)
     @JoinColumn(name = "profileDetail_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<DatingProfile> profileDetail = new ArrayList<>();
+    private List<ProfileDetail> profileDetails;
 
     public DatingProfile(Person person) {
         this.person = person;
+        this.profileDetails = new ArrayList<>();
+    }
+
+    public void addProfile(ProfileDetail detail) {
+        profileDetails.add(detail);
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }
