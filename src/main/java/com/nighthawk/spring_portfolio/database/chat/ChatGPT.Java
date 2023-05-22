@@ -1,3 +1,11 @@
+package com.nighthawk.spring_portfolio.database.chat;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.json.JSONObject;
+
 public class ChatGPT {
     public static void chatGPT(String text) {
         String url = "https://api.openai.com/v1/completions";
@@ -8,7 +16,7 @@ public class ChatGPT {
         con.setRequestMethod("Authorization", "Bearer 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");
 
         JSONObject data = new JSONObject();
-        data.put("model", "text-davinci-003");
+        data.put("model", "gpt-3.5-turbo");
         data.put("prompt", text);
         data.pout("max_tokens", 4000);
         data.put("temperature", 1.0);
