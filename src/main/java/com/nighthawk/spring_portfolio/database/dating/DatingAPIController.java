@@ -45,15 +45,4 @@ public class DatingAPIController {
         return new ResponseEntity<>(profile, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deletePerson(@PathVariable long id) {
-        Person person = personRepository.findById(id).orElse(null);
-        if (person == null) {
-            return new ResponseEntity<>("person not found", HttpStatus.OK);
-        }
-
-        personRepository.delete(person);
-
-        return new ResponseEntity<>("" + id + " and all relevant grades deleted", HttpStatus.OK);
-    }
 }

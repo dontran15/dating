@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.nighthawk.spring_portfolio.database.ModelRepository;
+import com.nighthawk.spring_portfolio.database.dating.DatingProfile;
+import com.nighthawk.spring_portfolio.database.dating.DatingProfileJpaRepository;
 import com.nighthawk.spring_portfolio.database.role.RoleJpaRepository;
 
 import java.util.*;
@@ -33,6 +35,9 @@ public class PersonApiController {
     // there
     @Autowired
     private PersonJpaRepository personRepository;
+
+    @Autowired
+    private DatingProfileJpaRepository datingRepository;
 
     /*
      * GET List of People
@@ -65,9 +70,16 @@ public class PersonApiController {
             return new ResponseEntity<>("person not found", HttpStatus.OK);
         }
 
+        DatingProfile profile = datingRepository.findByPerson(person);
+
+        if (profile == null) {
+            return new ResponseEntity<>("profile not found (should not happen)", HttpStatus.OK);
+        }
+
+        datingRepository.delete(profile);
         personRepository.delete(person);
 
-        return new ResponseEntity<>("" + id + " and all relevant grades deleted", HttpStatus.OK);
+        return new ResponseEntity<>("" + id + " and dating profile deleted", HttpStatus.OK);
     }
 
     /*
