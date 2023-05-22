@@ -109,6 +109,7 @@ public class PersonApiController {
         repository.save(person);
 
         DatingProfile profile = new DatingProfile(person);
+        datingRepository.save(profile);
 
         return new ResponseEntity<>(email + " is created successfully", HttpStatus.CREATED);
     }
