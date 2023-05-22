@@ -3,6 +3,8 @@ package com.nighthawk.spring_portfolio.database.person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.nighthawk.spring_portfolio.database.dating.DatingProfile;
+
 import java.util.List;
 import java.util.Optional;
 

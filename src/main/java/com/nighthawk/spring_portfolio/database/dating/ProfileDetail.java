@@ -19,7 +19,7 @@ public class ProfileDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    protected enum Type {
+    private enum Type {
         PERSONALITY, LIFESTYLE, INTEREST, MISC
     }
 
@@ -36,9 +36,11 @@ public class ProfileDetail {
     }
 
     // TODO: Format as JSON to send for training
-    public String toString() {
-        return "";
-    }
+    // @Override
+    // public String toString() {
+    // return "{ \"id\": " + id + ", \"type\": " + type + ", \"detail\": " + detail
+    // + " }";
+    // }
 
     public ProfileDetail(String type) {
         this.detail = null;

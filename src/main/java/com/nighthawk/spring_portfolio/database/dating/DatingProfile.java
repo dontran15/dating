@@ -50,8 +50,8 @@ public class DatingProfile {
         profileDetail.add(detail);
     }
 
-    @Override
-    public String toString() {
-        return "";
-    }
+    // @Override
+    // public String toString() {
+    // return "{ \"id\": " + id + p + " }";
+    // }
 }
