@@ -14,7 +14,7 @@ public class ChatGPT {
 
         con.setRequestMethod("POST");
         con.setRequestMethod("Content-Type", "application/json");
-        con.setRequestMethod("Authorization", "Bearer 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");
+        con.setRequestMethod("Authorization", "Bearer " + (String) env.secret);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
@@ -41,7 +41,7 @@ public class ChatGPT {
         return null;
     }   con.setRequestMethod("POST");
         con.setRequestMethod("Content-Type", "application/json");
-        con.setRequestMethod("Authorization", "Bearer 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");
+        con.setRequestMethod("Authorization", "Bearer " + (String) env.secret);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
