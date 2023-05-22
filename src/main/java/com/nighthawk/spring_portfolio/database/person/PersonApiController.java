@@ -28,7 +28,7 @@ public class PersonApiController {
     @Autowired
     private ModelRepository repository;
 
-    // Individual Repositories for People, Grades & Assignments
+    // Individual Repositories for People and Dating
     // didn't want to mess up ModelRepository so i didn't add assignment/grade repos
     // there
     @Autowired
