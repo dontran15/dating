@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ChatGPT {
 
-    private static String secret = System.getenv("secret");;
+    private static String secret = System.getenv("secret");
 
     public static void chatGPTTest(String text, String key) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
@@ -51,7 +51,7 @@ public class ChatGPT {
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
-        data.put("prompt", text);
+        data.put("prompt", "Please generate one pickup line related to the topic of " + text + ".");
         data.put("max_tokens", 4000);
         data.put("temperature", 1.0);
 
@@ -77,7 +77,7 @@ public class ChatGPT {
         System.out.println("Enter a prompt: ");
         String key = sc.nextLine();
         sc.close();
-        chatGPTTest("Generate a list of very funny pickup line as a joke.", key);
+        chatGPTTest("Generate a list of pickup lines.", key);
     }
 
 }
