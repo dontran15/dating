@@ -3,8 +3,8 @@ services:
   web:
     image: java_springv1_t6
     build: .
-    env: 
-      secret: ${{secrets.SECRET}}
+    # env: 
+    #   secret: ${{secrets.SECRET}}
     ports:
       - "8040:8040"
     volumes:
