@@ -25,7 +25,7 @@ public class ChatGPT {
         con.setRequestProperty("Authorization", "Bearer " + key);
 
         JSONObject data = new JSONObject();
-        data.put("model", "gpt-3.5-turbo");
+        data.put("model", "text-davinci-003");
         data.put("prompt", text);
         data.put("max_tokens", 4000);
         data.put("temperature", 1.0);
@@ -40,7 +40,7 @@ public class ChatGPT {
     }
 
     public static String chatGPT(String text) throws MalformedURLException, IOException {
-        String url = "https://api.openai.com/v1/completions";
+        String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
      
@@ -77,7 +77,7 @@ public class ChatGPT {
         System.out.println("Enter a prompt: ");
         String key = sc.nextLine();
         sc.close();
-        chatGPTTest("Generate a list of funny pickup line as a joke.", key);
+        chatGPTTest("Generate a list of very funny pickup line as a joke.", key);
     }
 
 }
