@@ -1,20 +1,27 @@
 package com.nighthawk.spring_portfolio.database.chat;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.ArrayList;
 
 public class ChatGPT {
-    public static void chatGPTTest(String text) {
+
+    private static String secret = System.getenv("secret");;
+
+    public static void chatGPTTest(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + (String) env.secret);
+        con.setRequestProperty("Authorization", "Bearer " + secret);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
@@ -31,7 +38,7 @@ public class ChatGPT {
         System.out.println(new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
-    public static String chatGPT(String text) {
+    public static String chatGPT(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -39,7 +46,7 @@ public class ChatGPT {
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + (String) env.secret);
+        con.setRequestProperty("Authorization", "Bearer " + secret);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
@@ -56,7 +63,7 @@ public class ChatGPT {
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 
-    public static ArrayList<String> generateMultiple(String prompt, int responses) {
+    public static ArrayList<String> generateMultiple(String prompt, int responses) throws MalformedURLException, IOException {
         ArrayList<String> response = new ArrayList<String>();
         for (int i = 0; i < responses; i++) {
             response.add(chatGPT(prompt));

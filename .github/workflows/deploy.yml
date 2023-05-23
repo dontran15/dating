@@ -10,11 +10,13 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
+      - name: Set up secret API Key
+        run:  echo "SECRET=secret" >> $GITHUB_ENV    
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.KEY  }}
         run: |
-            echo "$PRIVATE_KEY" > private_key && chmod 600 private_key         
+            echo "$PRIVATE_KEY" > private_key && chmod 600 private_key     
             ssh -i private_key -o StrictHostKeyChecking=no ubuntu@35.168.137.247 '          
               cd /home/ubuntu/tri3/rizzai-backend/
               sudo docker-compose down
@@ -24,3 +26,4 @@ jobs:
               git pull
               sudo docker-compose up -d --build
             '
+          
