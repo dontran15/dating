@@ -13,8 +13,8 @@ public class ChatGPT {
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
-        con.setRequestMethod("Content-Type", "application/json");
-        con.setRequestMethod("Authorization", "Bearer " + (String) env.secret);
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Authorization", "Bearer " + (String) env.secret);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
@@ -38,13 +38,13 @@ public class ChatGPT {
      
 
         con.setRequestMethod("POST");
-        con.setRequestMethod("Content-Type", "application/json");
-        con.setRequestMethod("Authorization", "Bearer " + (String) env.secret);
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Authorization", "Bearer " + (String) env.secret);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
         data.put("prompt", text);
-        data.pout("max_tokens", 4000);
+        data.put("max_tokens", 4000);
         data.put("temperature", 1.0);
 
         con.setDoOutput(true);
