@@ -10,18 +10,19 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ChatGPT {
 
     private static String secret = System.getenv("secret");;
 
-    public static void chatGPTTest(String text) throws MalformedURLException, IOException {
+    public static void chatGPTTest(String text, String key) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + secret);
+        con.setRequestProperty("Authorization", "Bearer " + key);
 
         JSONObject data = new JSONObject();
         data.put("model", "gpt-3.5-turbo");
@@ -72,7 +73,11 @@ public class ChatGPT {
     }
 
     public static void main(String[] args) throws Exception {
-        chatGPTTest("Generate a list of funny pickup line as a joke.");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a prompt: ");
+        String key = sc.nextLine();
+        sc.close();
+        chatGPTTest("Generate a list of funny pickup line as a joke.", key);
     }
 
 }
