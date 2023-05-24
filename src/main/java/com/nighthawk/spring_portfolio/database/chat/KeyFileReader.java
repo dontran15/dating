@@ -6,11 +6,11 @@ import java.io.IOException;
 
 public class KeyFileReader {
     public static String getKey() {
-        String filePath = "~/tri3/rizzai-key";
+        String filePath = "src/main/java/com/nighthawk/spring_portfolio/database/chat/key.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Process each line in the file
+                // Process first line in the file (key)
                 return line;
             }
         } catch (IOException e) {
@@ -20,16 +20,17 @@ public class KeyFileReader {
         return "error";
     }
 
-    public static void main(String[] args) {
-        String filePath = "~/tri3/rizzai-key";
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Process each line in the file
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void main(String[] args) {
+    // String filePath =
+    // "src/main/java/com/nighthawk/spring_portfolio/database/chat/key.txt";
+    // try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    // String line;
+    // while ((line = br.readLine()) != null) {
+    // // Process each line in the file
+    // System.out.println(line);
+    // }
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // }
+    // }
 }
