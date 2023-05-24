@@ -39,7 +39,7 @@ public class Chat {
         System.out.println(new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
-    public String chatGPT(String text) throws MalformedURLException, IOException {
+    public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -62,6 +62,29 @@ public class Chat {
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 
+    public String chatGPTGeneral(String text) throws MalformedURLException, IOException {
+        String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
+        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Authorization", "Bearer " + secret);
+
+        JSONObject data = new JSONObject();
+        data.put("model", "text-davinci-003");
+        data.put("prompt", text);
+        data.put("max_tokens", 4000);
+        data.put("temperature", 1.0);
+
+        con.setDoOutput(true);
+        con.getOutputStream().write(data.toString().getBytes());
+
+        String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
+                .reduce((a, b) -> a + b).get();
+
+        return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
+    }
+
     public ArrayList<String> generateMultiple(int responses, String prompt) throws MalformedURLException, IOException {
         ArrayList<String> response = new ArrayList<String>();
         String topic = prompt;
@@ -71,7 +94,7 @@ public class Chat {
         }
 
         for (int i = 0; i < responses; i++) {
-            response.add(chatGPT(topic));
+            response.add(chatGPTPickUpLines(topic));
         }
         return response;
     }
@@ -83,5 +106,4 @@ public class Chat {
         sc.close();
         chatGPTTest("Generate a list of pickup lines.", key);
     }
-
 }

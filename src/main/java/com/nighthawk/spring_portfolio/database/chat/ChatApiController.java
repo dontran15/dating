@@ -3,21 +3,26 @@ package com.nighthawk.spring_portfolio.database.chat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/chat")
 public class ChatApiController {
     private Chat chatGPT = new Chat();
 
-    @GetMapping("/generate") // to do generate response based on profile
-    public ResponseEntity<Object> generatePickupLines(@RequestParam String prompt, @RequestParam int responses)
+    @GetMapping("/generateLines") // to do generate response based on profile
+    public ResponseEntity<Object> generatePickupLines(@RequestBody final Map<String, Object> map)
             throws MalformedURLException, IOException {
+
+        String prompt = (String) map.get("prompt");
+        int responses = Integer.valueOf((String) map.get("responses"));
 
         ArrayList<String> response;
 
@@ -29,4 +34,16 @@ public class ChatApiController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // to do, do an overall api on any prompt, as long as it's related to love
+    // (requires two prompts to check using gpt)
+    @GetMapping("/generate")
+    public ResponseEntity<Object> generateLoveAdvice(@RequestBody final Map<String, Object> map)
+            throws MalformedURLException, IOException {
+
+        String prompt = (String) map.get("prompt");
+
+        String response = chatGPT.chatGPTGeneral(prompt);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
