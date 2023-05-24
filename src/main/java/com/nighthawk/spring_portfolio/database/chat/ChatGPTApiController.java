@@ -19,8 +19,7 @@ public class ChatGPTApiController {
     private ChatGPT chatGPT = new ChatGPT();
 
     @GetMapping("/generate")
-    public ResponseEntity<Object> generatePickupLines(@RequestParam String
-    prompt, @RequestParam int responses) throws MalformedURLException, IOException {
+    public ResponseEntity<Object> generatePickupLines(@RequestParam String prompt, @RequestParam int responses) throws MalformedURLException, IOException {
 
         ArrayList<String> response;
 
@@ -30,6 +29,6 @@ public class ChatGPTApiController {
             response = (ArrayList<String>)(chatGPT.generateMultiple(responses, prompt));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
-}
+    }
 
 }
