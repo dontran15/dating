@@ -16,6 +16,6 @@ public interface ReviewJpaRepository extends JpaRepository<Review, Long> {
     @Query(value = "SELECT * FROM Review r WHERE r.name LIKE ?1 or r.contact LIKE ?1", nativeQuery = true)
     List<Review> findByReviewernameorContact(String term);
 
-    @Query(value = "SELECT max(id) FROM Review")
-    long getMaxId();
+    // @Query(value = "SELECT max(id) FROM Practice")
+    // long getMaxId();
 }
