@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Chat {
 
-    private static String secret = System.getenv("CHAT_SECRET");
+    private static String secret = System.getenv("CHATGPT_KEY");
 
     public static String chatGPTTest(String text, String key) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
