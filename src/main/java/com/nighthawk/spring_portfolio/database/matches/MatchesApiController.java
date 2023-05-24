@@ -28,4 +28,17 @@ public class MatchesApiController {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<Matches> addName(@RequestParam("name") String name,
+            @RequestParam("Age") int age,
+            @RequestParam("Location") String location,
+            @RequestParam("Pronouns") String pronouns) {
+        Matches savedMatches = repository.save(new Matches(null, name, age, location, pronouns));
+        if (savedMatches != null) {
+            return new ResponseEntity<>(savedMatches, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 }

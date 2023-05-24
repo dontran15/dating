@@ -69,4 +69,27 @@ public class Review {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    public static void main(String[] args) {
+        // Create a new review
+        Review review = new Review(null, "Hetvi Trivedi", 17, "Great website! Very aesthetic", "hetvit27@gmail.com");
+
+        // Print the review's properties
+        System.out.println("Reviewer Name: " + review.getReviewername());
+        System.out.println("Age: " + review.getAge());
+        System.out.println("Review Text: " + review.getReviewtext());
+        System.out.println("Contact: " + review.getContact());
+
+        // Update the review's properties
+        review.setReviewername("Jane Smith");
+        review.setAge(30);
+        review.setReviewtext("Excellent service!");
+        review.setContact("jane.smith@example.com");
+
+        // Print the updated review's properties
+        System.out.println("Reviewer Name (Updated): " + review.getReviewername());
+        System.out.println("Age (Updated): " + review.getAge());
+        System.out.println("Review Text (Updated): " + review.getReviewtext());
+        System.out.println("Contact (Updated): " + review.getContact());
+    }
 }

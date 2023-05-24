@@ -31,4 +31,18 @@ public class ReviewApiController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteReview(@RequestParam("name") String reviewername,
+            @RequestParam("Age") int age,
+            @RequestParam("Review") String reviewtext,
+            @RequestParam("Contact") String contact) {
+        List<Review> reviewsToDelete = repository.findByReviewernameAndAgeAndReviewtextAndContact(reviewername, age,
+                reviewtext, contact);
+        if (!reviewsToDelete.isEmpty()) {
+            repository.deleteAll(reviewsToDelete);
+            return new ResponseEntity<>("Review(s) deleted successfully", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
+    }
 }
