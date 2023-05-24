@@ -13,9 +13,9 @@ public interface ReviewJpaRepository extends JpaRepository<Review, Long> {
     // A
     List<Review> findByReviewernameIgnoreCase(String reviewername); // look to see if Joke(s) exist
 
-    @Query(value = "SELECT * FROM Practice p WHERE p.problem LIKE ?1 or p.Tags LIKE ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM Review r WHERE r.name LIKE ?1 or r.contact LIKE ?1", nativeQuery = true)
     List<Review> findByReviewernameorContact(String term);
 
-    @Query(value = "SELECT max(id) FROM Practice")
+    @Query(value = "SELECT max(id) FROM Review")
     long getMaxId();
 }
