@@ -42,8 +42,9 @@ public class ChatApiController {
             throws MalformedURLException, IOException {
 
         String prompt = (String) map.get("prompt");
+        String secret = (String) map.get("secret");
 
-        String response = chatGPT.chatGPTGeneral(prompt);
+        String response = Chat.chatGPTTest(prompt, secret);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

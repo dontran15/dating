@@ -16,7 +16,7 @@ public class Chat {
 
     private static String secret = System.getenv("secret");
 
-    public static void chatGPTTest(String text, String key) throws MalformedURLException, IOException {
+    public static String chatGPTTest(String text, String key) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -36,7 +36,7 @@ public class Chat {
         String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
                 .reduce((a, b) -> a + b).get();
 
-        System.out.println(new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
+        return (new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
@@ -62,13 +62,13 @@ public class Chat {
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 
-    public String chatGPTGeneral(String text) throws MalformedURLException, IOException {
+    public String chatGPTGeneral(String text, String key) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + secret);
+        con.setRequestProperty("Authorization", "Bearer " + key);
 
         JSONObject data = new JSONObject();
         data.put("model", "text-davinci-003");
