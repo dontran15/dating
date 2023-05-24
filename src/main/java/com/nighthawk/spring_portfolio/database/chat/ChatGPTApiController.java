@@ -14,8 +14,6 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("api/chat")
 public class ChatGPTApiController {
-
-    @Autowired
     private ChatGPT chatGPT = new ChatGPT();
 
     @GetMapping("/generate") // to do generate response based on profile
