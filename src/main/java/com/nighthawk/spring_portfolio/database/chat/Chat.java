@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Chat {
 
-    private static String secret = System.getenv("secret");
+    private static String secret = System.getenv("CHAT_SECRET");
 
     public static String chatGPTTest(String text, String key) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
@@ -40,7 +40,7 @@ public class Chat {
     }
 
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
-        String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
+        String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
@@ -68,7 +68,7 @@ public class Chat {
      */
     // public String chatGPTGeneral(String text, String key) throws
     // MalformedURLException, IOException {
-    // String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
+    // String url = "https://api.openai.com/v1/completions";
     // HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
     // con.setRequestMethod("POST");
