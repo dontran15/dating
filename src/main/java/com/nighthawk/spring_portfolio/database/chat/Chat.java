@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChatGPT {
+public class Chat {
 
     private static String secret = System.getenv("secret");
 
@@ -34,16 +34,14 @@ public class ChatGPT {
         con.getOutputStream().write(data.toString().getBytes());
 
         String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
-            .reduce((a, b) -> a + b).get();
-            
+                .reduce((a, b) -> a + b).get();
+
         System.out.println(new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
     public String chatGPT(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
-
-     
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
@@ -59,8 +57,8 @@ public class ChatGPT {
         con.getOutputStream().write(data.toString().getBytes());
 
         String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
-            .reduce((a, b) -> a + b).get();
-            
+                .reduce((a, b) -> a + b).get();
+
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 

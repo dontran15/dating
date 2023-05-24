@@ -1,6 +1,5 @@
 package com.nighthawk.spring_portfolio.database.chat;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("api/chat")
-public class ChatGPTApiController {
-    private ChatGPT chatGPT = new ChatGPT();
+public class ChatApiController {
+    private Chat chatGPT = new Chat();
 
     @GetMapping("/generate") // to do generate response based on profile
     public ResponseEntity<Object> generatePickupLines(@RequestParam String prompt, @RequestParam int responses)
