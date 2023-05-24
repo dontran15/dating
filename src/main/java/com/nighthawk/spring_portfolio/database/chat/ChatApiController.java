@@ -3,6 +3,7 @@ package com.nighthawk.spring_portfolio.database.chat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class ChatApiController {
     private Chat chatGPT = new Chat();
 
-    @GetMapping("/generateLines") // to do generate response based on profile
+    @PostMapping("/generateLines") // to do generate response based on profile
     public ResponseEntity<Object> generatePickupLines(@RequestBody final Map<String, Object> map)
             throws MalformedURLException, IOException {
 
@@ -36,7 +37,7 @@ public class ChatApiController {
 
     // to do, do an overall api on any prompt, as long as it's related to love
     // (requires two prompts to check using gpt)
-    @GetMapping("/generate")
+    @PostMapping("/generate")
     public ResponseEntity<Object> generateLoveAdvice(@RequestBody final Map<String, Object> map)
             throws MalformedURLException, IOException {
 
