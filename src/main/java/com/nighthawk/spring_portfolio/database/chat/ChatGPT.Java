@@ -50,7 +50,7 @@ public class ChatGPT {
         con.setRequestProperty("Authorization", "Bearer " + secret);
 
         JSONObject data = new JSONObject();
-        data.put("model", "gpt-3.5-turbo");
+        data.put("model", "text-davinci-003");
         data.put("prompt", "Please generate one pickup line related to the topic of " + text + ".");
         data.put("max_tokens", 4000);
         data.put("temperature", 1.0);
@@ -64,10 +64,16 @@ public class ChatGPT {
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 
-    public static ArrayList<String> generateMultiple(String prompt, int responses) throws MalformedURLException, IOException {
+    public static ArrayList<String> generateMultiple(int responses, String prompt) throws MalformedURLException, IOException {
         ArrayList<String> response = new ArrayList<String>();
+        String topic = prompt;
+
+        if (prompt == null || prompt.equals("")) {
+            topic = "anything";
+        }
+
         for (int i = 0; i < responses; i++) {
-            response.add(chatGPT(prompt));
+            response.add(chatGPT(topic));
         }
         return response;
     }
