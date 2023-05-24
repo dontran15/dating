@@ -18,15 +18,16 @@ public class ChatGPTApiController {
     @Autowired
     private ChatGPT chatGPT = new ChatGPT();
 
-    @GetMapping("/generate")
-    public ResponseEntity<Object> generatePickupLines(@RequestParam String prompt, @RequestParam int responses) throws MalformedURLException, IOException {
+    @GetMapping("/generate") // to do generate response based on profile
+    public ResponseEntity<Object> generatePickupLines(@RequestParam String prompt, @RequestParam int responses)
+            throws MalformedURLException, IOException {
 
         ArrayList<String> response;
 
         if (prompt == null || prompt.equals("")) {
             response = (ArrayList<String>) (chatGPT.generateMultiple(responses, null));
         } else {
-            response = (ArrayList<String>)(chatGPT.generateMultiple(responses, prompt));
+            response = (ArrayList<String>) (chatGPT.generateMultiple(responses, prompt));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
