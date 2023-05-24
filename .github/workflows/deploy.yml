@@ -10,8 +10,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      # - name: Set up secret API Key
-      #   run: echo "SECRET=${{ secrets.CHATGPT_KEY}}" >> $GITHUB_ENV
+      - name: Set up secret API Key
+        run: echo "SECRET=${{ env.CHATGPT_KEY }}" >> $GITHUB_ENV
       - name: Deploy in EC2
         env:
           PRIVATE_KEY: ${{ secrets.KEY  }}
