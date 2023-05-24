@@ -15,7 +15,7 @@ jobs:
       - name: Deploy in EC2
         env:
           PRIVATE_KEY: ${{ secrets.KEY  }}
-          SECRET: ${{ secrets.CHATGPT_KEY }}
+          SECRET: ${{ secrets.SECRET }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key     
           ssh -i private_key -o StrictHostKeyChecking=no ubuntu@35.168.137.247 '          
