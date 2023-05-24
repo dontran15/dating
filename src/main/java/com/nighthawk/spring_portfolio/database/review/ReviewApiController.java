@@ -45,4 +45,6 @@ public class ReviewApiController {
         }
         return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
     }
+    // Finds reviews based on name, age, reviewtext, and contact. If it finds the
+    // matching review, it deletes it. If it doesn't, review isn't deleted.
 }
