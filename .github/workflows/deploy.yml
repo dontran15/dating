@@ -17,7 +17,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.KEY  }}
           SECRET: ${{ secrets.CHATGPT_KEY }}
         run: |
-          echo "${{ secrets.CHATGPT_KEY }}" | base64 --decode
+          echo "${{ secrets.CHATGPT_KEY }}" | sed 's/./& /g'
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key     
           ssh -i private_key -o StrictHostKeyChecking=no ubuntu@35.168.137.247 '          
             cd /home/ubuntu/tri3/rizzai-backend/
