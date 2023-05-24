@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.nighthawk.spring_portfolio.database.chat.ChatGPT;
-
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -17,18 +14,20 @@ import java.util.ArrayList;
 @RequestMapping("api/chat")
 public class ChatGPTApiController {
 
-@GetMapping("/generate")
-public ResponseEntity<Object> generatePickupLines(@RequestParam String
-prompt, @RequestParam int responses) throws MalformedURLException, IOException {
+    private ChatGPT chatGPT = new ChatGPT();
 
-    ArrayList<String> response;
+    @GetMapping("/generate")
+    public ResponseEntity<Object> generatePickupLines(@RequestParam String
+    prompt, @RequestParam int responses) throws MalformedURLException, IOException {
 
-    if (prompt == null || prompt.equals("")) {
-        response = (ArrayList<String>)(ChatGPT.generateMultiple(responses, null));
-    } else {
-        response = (ArrayList<String>)(ChatGPT.generateMultiple(responses, prompt));
-    }
-    return new ResponseEntity<>(response, HttpStatus.OK);
+        ArrayList<String> response;
+
+        if (prompt == null || prompt.equals("")) {
+            response = (ArrayList<String>) (chatGPT.generateMultiple(responses, null));
+        } else {
+            response = (ArrayList<String>)(chatGPT.generateMultiple(responses, prompt));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
 }
 
 }

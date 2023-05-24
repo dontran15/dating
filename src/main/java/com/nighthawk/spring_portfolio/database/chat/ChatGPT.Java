@@ -39,7 +39,7 @@ public class ChatGPT {
         System.out.println(new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
-    public static String chatGPT(String text) throws MalformedURLException, IOException {
+    public String chatGPT(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/engines/davinci-codex/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -64,7 +64,7 @@ public class ChatGPT {
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 
-    public static ArrayList<String> generateMultiple(int responses, String prompt) throws MalformedURLException, IOException {
+    public ArrayList<String> generateMultiple(int responses, String prompt) throws MalformedURLException, IOException {
         ArrayList<String> response = new ArrayList<String>();
         String topic = prompt;
 
