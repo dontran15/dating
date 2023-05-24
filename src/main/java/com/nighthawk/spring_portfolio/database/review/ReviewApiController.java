@@ -28,4 +28,20 @@ public class ReviewApiController {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<Review> addReviewername(@RequestParam("name") String reviewername,
+            @RequestParam("Age") int age,
+            @RequestParam("Review") String reviewtext,
+            @RequestParam("Contact") String contact) {
+        repository.save(new Review(null, reviewername, age, reviewtext, contact)); // JPA save
+        long maxId = repository.getMaxId();
+        Optional<Review> optional = repository.findById(maxId);
+        if (optional.isPresent()) {
+            Review review1 = optional.get();
+            return new ResponseEntity(review1, HttpStatus.OK);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
+    }
 }
