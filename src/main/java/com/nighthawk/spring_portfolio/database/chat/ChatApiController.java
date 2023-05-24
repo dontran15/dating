@@ -42,7 +42,7 @@ public class ChatApiController {
             throws MalformedURLException, IOException {
 
         String prompt = (String) map.get("prompt");
-        String secret = (String) map.get("secret");
+        String secret = System.getenv("SECRET");
 
         String response = Chat.chatGPTTest(prompt, secret);
 
