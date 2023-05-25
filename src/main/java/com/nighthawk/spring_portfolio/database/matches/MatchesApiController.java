@@ -31,9 +31,9 @@ public class MatchesApiController {
 
     @PostMapping("/add")
     public ResponseEntity<Matches> addName(@RequestParam("name") String name,
-            @RequestParam("Age") int age,
-            @RequestParam("Location") String location,
-            @RequestParam("Pronouns") String pronouns) {
+            @RequestParam("age") int age,
+            @RequestParam("location") String location,
+            @RequestParam("pronouns") String pronouns) {
         Matches savedMatches = repository.save(new Matches(null, name, age, location, pronouns));
         if (savedMatches != null) {
             return new ResponseEntity<>(savedMatches, HttpStatus.OK);
