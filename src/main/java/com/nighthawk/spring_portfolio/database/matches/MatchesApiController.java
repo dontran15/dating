@@ -41,4 +41,18 @@ public class MatchesApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteMatches(@RequestParam("name") String name,
+            @RequestParam("Age") int age,
+            @RequestParam("Location") String location,
+            @RequestParam("Pronouns") String pronouns) {
+        List<Matches> matchesToDelete = repository.findByNameAndAgeAndLocationAndPronouns(name, age,
+                location, pronouns);
+        if (!matchesToDelete.isEmpty()) {
+            repository.deleteAll(matchesToDelete);
+            return new ResponseEntity<>("match(es) deleted successfully", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Match not found", HttpStatus.NOT_FOUND);
+    }
+
 }
