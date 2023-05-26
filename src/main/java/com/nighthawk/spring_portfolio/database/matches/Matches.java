@@ -68,4 +68,27 @@ public class Matches {
     public void setPronouns(String pronouns) {
         this.pronouns = pronouns;
     }
+
+    public static void main(String[] args) {
+        // Create a new review
+        Matches matches = new Matches(null, "Iris Yang", 17, "san diego", "she/her");
+
+        // Print the review's properties
+        System.out.println("Name: " + matches.getName());
+        System.out.println("Age: " + matches.getAge());
+        System.out.println("Location: " + matches.getLocation());
+        System.out.println("Pronouns: " + matches.getPronouns());
+
+        // Update the review's properties
+        matches.setName("Iris Yang");
+        matches.setAge(17);
+        matches.setLocation("San Diego");
+        matches.setPronouns("she/her");
+
+        // Print the updated review's properties
+        System.out.println("Name (Updated): " + matches.getName());
+        System.out.println("Age (Updated): " + matches.getAge());
+        System.out.println("Location(Updated): " + matches.getLocation());
+        System.out.println("Pronouns (Updated): " + matches.getPronouns());
+    }
 }
