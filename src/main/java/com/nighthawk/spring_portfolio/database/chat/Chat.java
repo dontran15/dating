@@ -41,7 +41,7 @@ public class Chat {
 
     public static String gptRizz(String text) throws MalformedURLException, IOException {
         String response = ChatPyReader.pythonReader(
-                "act like a toxic masculine manly chad in popular culture and answer the query" + "'" + text + "'");
+                "Act like a toxic masculine manly chad in popular culture and answer the query" + "'" + text + "'");
 
         String check = response.substring(0, 1);
 
