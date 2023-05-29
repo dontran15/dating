@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class PythonFileReader {
-    public static String pythonReader() {
+public class ChatPyReader {
+    public static String pythonReader(String message) {
         try {
             // Create the ProcessBuilder and specify the command
             ProcessBuilder pb = new ProcessBuilder("python3",
-                    "src/main/java/com/nighthawk/spring_portfolio/database/chat/Chat.py");
+                    "src/main/java/com/nighthawk/spring_portfolio/database/chat/Chat.py", message);
 
             // Redirect the output of the Python process
             pb.redirectErrorStream(true);
@@ -33,8 +33,8 @@ public class PythonFileReader {
             int exitCode = process.waitFor();
 
             // Print the output
-            System.out.println("Exit Code: " + exitCode);
-            System.out.println("Output:\n" + output.toString());
+            // System.out.println("Exit Code: " + exitCode);
+            // System.out.println("Output:\n" + output.toString());
 
             return output.toString();
         } catch (IOException | InterruptedException e) {
@@ -44,6 +44,6 @@ public class PythonFileReader {
     }
 
     public static void main(String[] args) {
-        System.out.println(pythonReader());
+        System.out.println(pythonReader("is this query about love advice? 'how to make a cake'"));
     }
 }

@@ -1,4 +1,5 @@
 import requests
+import sys
 
 # gets chatgpt key from local aws machine
 def getKey():
@@ -8,8 +9,7 @@ def getKey():
     key = file.read()
     
     file.close()
-
-    print(key)
+    
     return key
 
 def checkQuery(message):
@@ -38,8 +38,12 @@ def checkQuery(message):
     response = requests.post(endpoint_url, json=data, headers=headers)
     response_json = response.json()
 
-    return response_json['choices'][0]['message']['content']
+    print(response_json['choices'][0]['message']['content'])
 
 # Tester
-message = "is this query about love advice? 'how to make a cake'"
-print(checkQuery(message))
+# message = "is this query about love advice? 'how to make a cake'"
+# print(checkQuery(message))
+
+# API Code
+message = sys.argv[1]
+checkQuery(message)

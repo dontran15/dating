@@ -42,10 +42,20 @@ public class ChatApiController {
             throws MalformedURLException, IOException {
 
         String prompt = (String) map.get("prompt");
-        // String secret = (String) map.get("secret");
-        String secret = KeyFileReader.getKey();
+        String response = Chat.chatGPTRizz(prompt);
 
-        String response = Chat.chatGPTTest(prompt, secret);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/queryTest")
+    public ResponseEntity<Object> queryTest(@RequestBody final Map<String, Object> map)
+            throws MalformedURLException, IOException {
+
+        String prompt = (String) map.get("prompt");
+        String secret = KeyFileReader.getKey();
+        String response = ChatPyReader.pythonReader(prompt);
+
+        System.out.println(response);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
