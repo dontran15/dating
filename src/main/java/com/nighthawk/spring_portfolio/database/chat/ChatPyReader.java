@@ -44,6 +44,6 @@ public class ChatPyReader {
     }
 
     public static void main(String[] args) {
-        System.out.println(pythonReader("is this query about love advice? 'how to make a cake'"));
+        System.out.println(pythonReader("how to make a cake"));
     }
 }

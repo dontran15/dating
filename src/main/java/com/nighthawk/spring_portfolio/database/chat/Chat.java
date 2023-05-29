@@ -39,8 +39,44 @@ public class Chat {
         return (new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
-    public static String chatGPTRizz(String text) throws MalformedURLException, IOException {
-        return "";
+    public static String gptRizz(String text) throws MalformedURLException, IOException {
+        String response = ChatPyReader.pythonReader(
+                "act like a toxic masculine manly chad in popular culture and answer the query" + "'" + text + "'");
+
+        String check = response.substring(0, 1);
+
+        if (response.indexOf("Apologies") != -1 || response.indexOf("Sorry") != -1 || response.indexOf("sorry") != -1) {
+            // circumvents ai model ethics thing :eyeroll: (just responds using davinci
+            // w/out 'chad' tone)
+            return chatGPTTest(text);
+        }
+
+        return response;
+    }
+
+    public static String chatRizz(String text, String model) throws MalformedURLException, IOException {
+        if (model.equals("gpt")) {
+            return gptRizz(text);
+        }
+
+        return chatGPTTest(text);
+    }
+
+    public static String chatGPTRizz(String text, String model) throws MalformedURLException, IOException {
+        // check using GPT text analysis on if prompt is dating advice
+        // returns DaVinci answer to prompt or error based on 'Yes'/'No' response
+
+        String check = ChatPyReader.pythonReader("is this query about love advice?" + "'" + text + "'").substring(0, 1);
+        if (check.equals("Y") || check.equals("C")) {
+            return chatRizz(text, model);
+        } else if (check.equals("N")) {
+            return "Sorry bro, this prompt just isn't about love advice. Ask me a more CHADLY question that I can give advice on chump. (Note: you might need to ask again to get a good response)";
+        }
+
+        // NOTE: only way to get around non-yes/no response due to 'inappropriate'
+        // prompt, this still means DaVinci will respond to all actual inappropriate
+        // prompts
+        return chatRizz(text, model);
     }
 
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
@@ -83,6 +119,9 @@ public class Chat {
     public static void main(String[] args) throws Exception {
         // NOTE: you need to create a file called key.txt that has key (get from me or
         // Bailey) AND MAKE SURE it's in .gitignore or bailey will be very angry
-        chatGPTTest("Generate a list of pickup lines.");
+        // System.out.println(chatGPTTest("Generate a list of pickup lines."));
+
+        System.out.println(chatGPTRizz(
+                "how to make a cake", "gpt"));
     }
 }

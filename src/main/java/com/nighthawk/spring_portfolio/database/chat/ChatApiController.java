@@ -2,11 +2,9 @@ package com.nighthawk.spring_portfolio.database.chat;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,7 +40,8 @@ public class ChatApiController {
             throws MalformedURLException, IOException {
 
         String prompt = (String) map.get("prompt");
-        String response = Chat.chatGPTRizz(prompt);
+        String model = "gpt"; // change to configure if response is to davinci (generic) or gpt (sentiment)
+        String response = Chat.chatGPTRizz(prompt, model);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
