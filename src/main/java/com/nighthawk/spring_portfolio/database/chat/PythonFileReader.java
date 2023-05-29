@@ -6,10 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class PythonFileReader {
-    public static void main(String[] args) {
+    public static String pythonReader() {
         try {
             // Create the ProcessBuilder and specify the command
-            ProcessBuilder pb = new ProcessBuilder("python",
+            ProcessBuilder pb = new ProcessBuilder("python3",
                     "src/main/java/com/nighthawk/spring_portfolio/database/chat/Chat.py");
 
             // Redirect the output of the Python process
@@ -35,8 +35,15 @@ public class PythonFileReader {
             // Print the output
             System.out.println("Exit Code: " + exitCode);
             System.out.println("Output:\n" + output.toString());
+
+            return output.toString();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+            return e.toString();
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(pythonReader());
     }
 }

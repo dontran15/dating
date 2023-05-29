@@ -1,11 +1,21 @@
 import requests
 
-api_key = "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";
+# gets chatgpt key from local aws machine
+def getKey():
+    file_path = "src/main/java/com/nighthawk/spring_portfolio/database/chat/key.txt"
 
-def send_message(message):
+    file = open(file_path, "r")
+    key = file.read()
+    
+    file.close()
+
+    print(key)
+    return key
+
+def checkQuery(message):
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}"
+        "Authorization": f"Bearer {getKey()}"
     }
 
     data = {
@@ -28,9 +38,8 @@ def send_message(message):
     response = requests.post(endpoint_url, json=data, headers=headers)
     response_json = response.json()
 
-    return response_json
+    return response_json['choices'][0]['message']['content']
 
+# Tester
 message = "is this query about love advice? 'how to make a cake'"
-response = send_message(message)
-
-print(response['choices'][0]['message']['content'])
+print(checkQuery(message))
