@@ -80,26 +80,40 @@ public class Chat {
     }
 
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
-        String url = "https://api.openai.com/v1/completions";
-        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + secret);
+        String response = ChatPyReader.pythonReader(
+                "Generate one pickup line related to the topic of " + text + ".");
 
-        JSONObject data = new JSONObject();
-        data.put("model", "text-davinci-003");
-        data.put("prompt", "Please generate one pickup line related to the topic of " + text + ".");
-        data.put("max_tokens", 4000);
-        data.put("temperature", 1.0);
+        String check = response.substring(0, 1);
 
-        con.setDoOutput(true);
-        con.getOutputStream().write(data.toString().getBytes());
+        if (response.indexOf("Apologies") != -1 || response.indexOf("Sorry") != -1 || response.indexOf("sorry") != -1) {
+            // circumvents ai model ethics thing :eyeroll: (just responds using davinci
+            // w/out 'chad' tone)
+            return chatGPTTest("Generate one pickup line related to the topic of " + text + ".");
+        }
 
-        String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
-                .reduce((a, b) -> a + b).get();
+        return response;
 
-        return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
+        // String url = "https://api.openai.com/v1/completions";
+        // HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+
+        // con.setRequestMethod("POST");
+        // con.setRequestProperty("Content-Type", "application/json");
+        // con.setRequestProperty("Authorization", "Bearer " + KeyFileReader.getKey());
+
+        // JSONObject data = new JSONObject();
+        // data.put("model", "text-davinci-003");
+        // data.put("prompt", "Please generate one pickup line related to the topic of " + text + ".");
+        // data.put("max_tokens", 4000);
+        // data.put("temperature", 1.0);
+
+        // con.setDoOutput(true);
+        // con.getOutputStream().write(data.toString().getBytes());
+
+        // String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
+        //         .reduce((a, b) -> a + b).get();
+
+        // return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
 
     public ArrayList<String> generateMultiple(int responses, String prompt) throws MalformedURLException, IOException {
