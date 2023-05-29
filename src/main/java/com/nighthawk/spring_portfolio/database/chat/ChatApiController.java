@@ -52,7 +52,6 @@ public class ChatApiController {
             throws MalformedURLException, IOException {
 
         String prompt = (String) map.get("prompt");
-        String secret = KeyFileReader.getKey();
         String response = ChatPyReader.pythonReader(prompt);
 
         System.out.println(response);
