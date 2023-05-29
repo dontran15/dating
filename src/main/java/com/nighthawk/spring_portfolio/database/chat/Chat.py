@@ -41,9 +41,9 @@ def checkQuery(message):
     print(response_json['choices'][0]['message']['content'])
 
 # Tester
-message = "is this query about love advice? 'how to make a cake'"
-print(checkQuery(message))
+# message = "is this query about love advice? 'how to make a cake'"
+# print(checkQuery(message))
 
 # API Code
-# message = sys.argv[1]
-# checkQuery(message)
+message = sys.argv[1]
+checkQuery(message)
