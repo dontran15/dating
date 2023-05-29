@@ -16,13 +16,13 @@ public class Chat {
 
     private static String secret = System.getenv("SECRET");
 
-    public static String chatGPTTest(String text, String key) throws MalformedURLException, IOException {
+    public static String chatGPTTest(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + key);
+        con.setRequestProperty("Authorization", "Bearer " + KeyFileReader.getKey());
 
         JSONObject data = new JSONObject();
         data.put("model", "text-davinci-003");
@@ -37,6 +37,10 @@ public class Chat {
                 .reduce((a, b) -> a + b).get();
 
         return (new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
+    }
+
+    public static String chatGPTRizz(String text) throws MalformedURLException, IOException {
+        return "";
     }
 
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
@@ -77,10 +81,8 @@ public class Chat {
     }
 
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a prompt: ");
-        String key = sc.nextLine();
-        sc.close();
-        chatGPTTest("Generate a list of pickup lines.", key);
+        // NOTE: you need to create a file called key.txt that has key (get from me or
+        // Bailey) AND MAKE SURE it's in .gitignore or bailey will be very angry
+        chatGPTTest("Generate a list of pickup lines.");
     }
 }
