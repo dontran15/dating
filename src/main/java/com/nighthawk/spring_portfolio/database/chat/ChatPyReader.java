@@ -9,7 +9,7 @@ public class ChatPyReader {
     public static String pythonReader(String message) {
         try {
             // Create the ProcessBuilder and specify the command
-            ProcessBuilder pb = new ProcessBuilder("/usr/bin/python3",
+            ProcessBuilder pb = new ProcessBuilder("python",
                     "src/main/java/com/nighthawk/spring_portfolio/database/chat/Chat.py", message);
 
             // Redirect the output of the Python process
