@@ -1,5 +1,5 @@
-import requests
 import sys
+import requests
 
 # gets chatgpt key from local aws machine
 def getKey():
