@@ -8,6 +8,9 @@ def getKey():
     file = open(file_path, "r")
     key = file.read()
     
+    # clear out any \n characters
+    key = key.replace('\n', '')
+    
     file.close()
     
     return key
