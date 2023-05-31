@@ -35,7 +35,7 @@ public class ChatApiController {
 
         ArrayList<Map<String, Object>> jsList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < response.size(); i++) {
-            HashMap js = new HashMap();
+            HashMap<String, Object> js = new HashMap<String, Object>();
             js.put("id", i);
             js.put("line", response.get(i));
             js.put("wordCount", response.get(i).split(" ").length);
