@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -32,12 +33,12 @@ public class ChatApiController {
             response = (ArrayList<String>) (chatGPT.generateMultiple(responses, prompt));
         }
 
-        ArrayList<JSONObject> jsList = new ArrayList<JSONObject>();
+        ArrayList<Map<String, Object>> jsList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < response.size(); i++) {
-            JSONObject js = new JSONObject();
-            js.append("id", i);
-            js.append("line", response.get(i));
-            js.append("wordCount", response.get(i).split(" ").length);
+            HashMap js = new HashMap();
+            js.put("id", i);
+            js.put("line", response.get(i));
+            js.put("wordCount", response.get(i).split(" ").length);
             jsList.add(js);
         }
 
