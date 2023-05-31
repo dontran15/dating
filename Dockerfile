@@ -2,7 +2,8 @@
 FROM openjdk:16-alpine3.13
 WORKDIR /app
 RUN apk update && apk upgrade && \
-    apk add --no-cache git
+    apk add --no-cache git python3 py3-pip
+RUN pip3 install requests
 COPY ["pom.xml", "mvnw", "./"]
 COPY .mvn .mvn
 RUN ./mvnw install -Dspring-boot.repackage.skip=true
