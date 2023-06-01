@@ -46,7 +46,6 @@ public class ChatApiController {
             jsList.add(js);
         }
 
-        
         return new ResponseEntity<>(jsList, HttpStatus.OK);
     }
 
@@ -58,7 +57,8 @@ public class ChatApiController {
 
         String prompt = (String) map.get("prompt");
         String model = "gpt"; // change to configure if response is to davinci (generic) or gpt (sentiment)
-        String response = Chat.chatGPTRizz(prompt, model);
+        String botName = (String) map.get("botName");
+        String response = Chat.chatGPTRizz(prompt, model, botName);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
