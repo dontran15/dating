@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.nighthawk.spring_portfolio.database.dating.DatingProfile;
+import com.nighthawk.spring_portfolio.database.dating.DatingProfileJpaRepository;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -55,6 +59,27 @@ public class ChatApiController {
 
         System.out.println(response);
 
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/pickUpLines") // to do generate response based on profile
+    public ResponseEntity<Object> generateProfilePickUpLines(@RequestBody final Map<String, Object> map)
+            throws MalformedURLException, IOException {
+
+        String prompt = (String) map.get("prompt");
+        int responses = Integer.valueOf((String) map.get("responses"));
+
+        long profileId = Long.valueOf((String) map.get("profileId"));
+
+        // DatingProfile profile = profilerep.findById(profileId).orElse(null);
+
+        ArrayList<String> response;
+
+        if (prompt == null || prompt.equals("")) {
+            response = (ArrayList<String>) (chatGPT.generateMultiple(responses, null));
+        } else {
+            response = (ArrayList<String>) (chatGPT.generateMultiple(responses, prompt));
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
