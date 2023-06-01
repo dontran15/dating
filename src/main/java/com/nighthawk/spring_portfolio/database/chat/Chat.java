@@ -16,7 +16,7 @@ public class Chat {
 
     private static String secret = System.getenv("SECRET");
 
-    public static String chatGPTTest(String text) throws MalformedURLException, IOException {
+    public static String daVinciTest(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -39,6 +39,7 @@ public class Chat {
         return (new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text"));
     }
 
+    // actual function to send queries based on bot personality
     public static String gptRizz(String text, String botName) throws MalformedURLException, IOException {
         String response = "";
 
@@ -55,46 +56,56 @@ public class Chat {
                                 + "'" + text + "'");
                 break;
             default:
-                response = chatGPTTest(text);
+                response = daVinciTest(text);
         }
 
         String check = response.substring(0, 1);
 
+        // checks for GPT's inappropriate responses
         if (response.indexOf("Apologies") != -1 || response.indexOf("Sorry") != -1 || response.indexOf("sorry") != -1) {
             // circumvents ai model ethics thing :eyeroll: (just responds using davinci
             // w/out 'chad' tone)
-            return chatGPTTest(text);
+            return daVinciTest(text);
         }
 
         return response;
     }
 
-    public static String chatRizz(String text, String model, String botName) throws MalformedURLException, IOException {
+    // checks model being used (for now in apicontroller being a constant passed
+    // through)
+    public static String callModel(String text, String model, String botName)
+            throws MalformedURLException, IOException {
         if (model.equals("gpt")) {
             return gptRizz(text, botName);
         }
 
-        return chatGPTTest(text);
+        return daVinciTest(text);
     }
 
-    public static String chatGPTRizz(String text, String model, String botName)
+    // checks if love advice prompt (removed checks for now since it makes responses
+    // too
+    // long)
+    public static String loveAdvice(String text, String model, String botName)
             throws MalformedURLException, IOException {
         // check using GPT text analysis on if prompt is dating advice
         // returns DaVinci answer to prompt or error based on 'Yes'/'No' response
 
-        String check = ChatPyReader
-                .pythonReader("is this query about love advice or being an alpha male:" + "'" + text + "'")
-                .substring(0, 1);
-        if (check.equals("Y") || check.equals("C")) {
-            return chatRizz(text, model, botName);
-        } else if (check.equals("N")) {
-            return "Sorry bro, this prompt just isn't about love advice. Ask me a more CHADLY question that I can give advice on chump. (Note: you might need to ask again to get a good response)";
-        }
+        // String check = ChatPyReader
+        // .pythonReader("is this query about love advice or being an alpha male:" + "'"
+        // + text + "'")
+        // .substring(0, 1);
+        // if (check.equals("Y") || check.equals("C")) {
+        // return chatRizz(text, model, botName);
+        // } else if (check.equals("N")) {
+        // return "Sorry bro, this prompt just isn't about love advice. Ask me a more
+        // CHADLY question that I can give advice on chump. (Note: you might need to ask
+        // again to get a good response)";
+        // }
 
         // NOTE: only way to get around non-yes/no response due to 'inappropriate'
         // prompt, this still means DaVinci will respond to all actual inappropriate
         // prompts
-        return chatRizz(text, model, botName);
+        return callModel(text, model, botName);
     }
 
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
@@ -139,6 +150,6 @@ public class Chat {
         // Bailey) AND MAKE SURE it's in .gitignore or bailey will be very angry
         // System.out.println(chatGPTTest("Generate a list of pickup lines."));
 
-        System.out.println(chatGPTRizz("who are you", "gpt", "Chad"));
+        System.out.println(loveAdvice("who are you", "gpt", "Chad"));
     }
 }

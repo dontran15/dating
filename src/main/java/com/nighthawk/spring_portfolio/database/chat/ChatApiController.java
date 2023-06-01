@@ -58,7 +58,7 @@ public class ChatApiController {
         String prompt = (String) map.get("prompt");
         String model = "gpt"; // change to configure if response is to davinci (generic) or gpt (sentiment)
         String botName = (String) map.get("botName");
-        String response = Chat.chatGPTRizz(prompt, model, botName);
+        String response = Chat.loveAdvice(prompt, model, botName);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
