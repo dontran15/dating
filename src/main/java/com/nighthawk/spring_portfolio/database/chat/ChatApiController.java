@@ -42,6 +42,7 @@ public class ChatApiController {
             HashMap<String, Object> js = new HashMap<String, Object>();
             js.put("id", i);
             js.put("line", response.get(i));
+            js.put("topic", prompt);
             js.put("wordCount", response.get(i).split(" ").length);
             jsList.add(js);
         }
