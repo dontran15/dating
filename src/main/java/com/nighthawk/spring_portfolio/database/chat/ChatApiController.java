@@ -1,5 +1,6 @@
 package com.nighthawk.spring_portfolio.database.chat;
 
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import com.nighthawk.spring_portfolio.database.dating.DatingProfileJpaRepository
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -34,7 +36,18 @@ public class ChatApiController {
         } else {
             response = (ArrayList<String>) (chatGPT.generateMultiple(responses, prompt));
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+
+        ArrayList<Map<String, Object>> jsList = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < response.size(); i++) {
+            HashMap<String, Object> js = new HashMap<String, Object>();
+            js.put("id", i);
+            js.put("line", response.get(i));
+            js.put("wordCount", response.get(i).split(" ").length);
+            jsList.add(js);
+        }
+
+        
+        return new ResponseEntity<>(jsList, HttpStatus.OK);
     }
 
     // to do, do an overall api on any prompt, as long as it's related to love
