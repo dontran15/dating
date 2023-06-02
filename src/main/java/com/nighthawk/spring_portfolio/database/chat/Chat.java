@@ -75,7 +75,7 @@ public class Chat {
     // through)
     public static String callModel(String text, String model, String botName)
             throws MalformedURLException, IOException {
-        if (text != null || text.equals("")) {
+        if (text == null || text.equals("")) {
             return "";
         }
 
