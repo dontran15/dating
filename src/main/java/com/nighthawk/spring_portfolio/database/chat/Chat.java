@@ -52,8 +52,9 @@ public class Chat {
                 break;
             case "Stacey":
                 response = ChatPyReader
-                        .pythonReader("act like a popular high school girl named stacey and answer the query: "
-                                + "'" + text + "'");
+                        .pythonReader(
+                                "Act like an entitled popular high school cheerleader named Stacey and answer the query: "
+                                        + "'" + text + "'");
                 break;
             default:
                 response = daVinciTest(text);
