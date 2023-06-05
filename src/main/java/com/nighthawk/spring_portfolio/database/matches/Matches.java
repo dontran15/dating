@@ -23,11 +23,14 @@ public class Matches {
     @Column
     private String pronouns;
 
+    @Column
+    private String socials;
+
     private Matches() {
 
     }
 
-    protected Matches(Long id, String name, int age, String location, String pronouns) {
+    protected Matches(Long id, String name, int age, String location, String pronouns, String socials) {
         if (name == null)
             throw new NullPointerException("name");
         this.age = age;
@@ -35,6 +38,7 @@ public class Matches {
         System.out.println(name);
         this.name = name;
         this.pronouns = pronouns;
+        this.socials = socials;
     }
 
     public String getName() {
@@ -53,6 +57,11 @@ public class Matches {
         return this.pronouns;
     }
 
+    public String getSocials() {
+        return this.socials;
+
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -69,26 +78,33 @@ public class Matches {
         this.pronouns = pronouns;
     }
 
+    public void setSocials(String socials) {
+        this.socials = socials;
+    }
+
     public static void main(String[] args) {
         // Create a new review
-        Matches matches = new Matches(null, "Iris Yang", 17, "san diego", "she/her");
+        Matches matches = new Matches(null, "Iris Yang", 17, "san diego", "she/her", "@iriisyang");
 
         // Print the review's properties
         System.out.println("Name: " + matches.getName());
         System.out.println("Age: " + matches.getAge());
         System.out.println("Location: " + matches.getLocation());
         System.out.println("Pronouns: " + matches.getPronouns());
+        System.out.println("Socials: " + matches.getSocials());
 
         // Update the review's properties
         matches.setName("Iris Yang");
         matches.setAge(17);
         matches.setLocation("San Diego");
         matches.setPronouns("she/her");
+        matches.setSocials("@iriisyang");
 
         // Print the updated review's properties
         System.out.println("Name (Updated): " + matches.getName());
         System.out.println("Age (Updated): " + matches.getAge());
         System.out.println("Location(Updated): " + matches.getLocation());
         System.out.println("Pronouns (Updated): " + matches.getPronouns());
+        System.out.println("Socials (Updated): " + matches.getSocials());
     }
 }
