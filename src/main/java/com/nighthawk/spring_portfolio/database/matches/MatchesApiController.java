@@ -44,10 +44,10 @@ public class MatchesApiController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteMatches(@RequestParam("name") String name,
-            @RequestParam("Age") int age,
-            @RequestParam("Location") String location,
-            @RequestParam("Pronouns") String pronouns,
-            @RequestParam("Socials") String socials) {
+            @RequestParam("age") int age,
+            @RequestParam("location") String location,
+            @RequestParam("pronouns") String pronouns,
+            @RequestParam("socials") String socials) {
         List<Matches> matchesToDelete = repository.findByNameAndAgeAndLocationAndPronounsAndSocials(name, age,
                 location, pronouns, socials);
         if (!matchesToDelete.isEmpty()) {
