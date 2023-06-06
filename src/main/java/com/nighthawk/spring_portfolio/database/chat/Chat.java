@@ -12,6 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * This is the original Java implementation of the ChatGPT API call
+ * 
+ * It creates an HttpURLConnection to the OpenAI API and sends a POST request with the prompt, similarly to how it's done on frontend
+ * 
+ * While this works fine, unfortunately it can only access the davinci 003 model for whatever reason, so the python implementation is preferred.
+ */
 public class Chat {
 
     private static String secret = System.getenv("SECRET");
@@ -113,6 +120,8 @@ public class Chat {
         return callModel(text, model, botName);
     }
 
+    // Original pickup line generator
+
     public String chatGPTPickUpLines(String text) throws MalformedURLException, IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
@@ -135,6 +144,8 @@ public class Chat {
 
         return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
     }
+
+    // Generates multiple pickup lines based on the number of lines requested
 
     public ArrayList<String> generateMultiple(int responses, String prompt) throws MalformedURLException, IOException {
         ArrayList<String> response = new ArrayList<String>();

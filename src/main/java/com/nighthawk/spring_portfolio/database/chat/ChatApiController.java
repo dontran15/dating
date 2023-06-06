@@ -20,6 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/chat")
 public class ChatApiController {
+
     private Chat chatGPT = new Chat();
 
     @PostMapping("/generateLines") // to do generate response based on profile
@@ -31,12 +32,14 @@ public class ChatApiController {
 
         ArrayList<String> response;
 
+        // If there's nothing in the prompt, generate a random response
         if (prompt == null || prompt.equals("")) {
             response = (ArrayList<String>) (chatGPT.generateMultiple(responses, null));
         } else {
             response = (ArrayList<String>) (chatGPT.generateMultiple(responses, prompt));
         }
 
+        // Add the response to a JSON object
         ArrayList<Map<String, Object>> jsList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < response.size(); i++) {
             HashMap<String, Object> js = new HashMap<String, Object>();
@@ -64,6 +67,7 @@ public class ChatApiController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // Checks if the prompt is a love question
     @PostMapping("/queryTest")
     public ResponseEntity<Object> queryTest(@RequestBody final Map<String, Object> map)
             throws MalformedURLException, IOException {
@@ -76,6 +80,8 @@ public class ChatApiController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
+    // Unused, use generateLines() instead to generate pickup lines
     @PostMapping("/pickUpLines") // to do generate response based on profile
     public ResponseEntity<Object> generateProfilePickUpLines(@RequestBody final Map<String, Object> map)
             throws MalformedURLException, IOException {
