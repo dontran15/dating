@@ -33,8 +33,9 @@ public class MatchesApiController {
     public ResponseEntity<Matches> addName(@RequestParam("name") String name,
             @RequestParam("age") int age,
             @RequestParam("location") String location,
-            @RequestParam("pronouns") String pronouns) {
-        Matches savedMatches = repository.save(new Matches(null, name, age, location, pronouns));
+            @RequestParam("pronouns") String pronouns,
+            @RequestParam("socials") String socials) {
+        Matches savedMatches = repository.save(new Matches(null, name, age, location, pronouns, socials));
         if (savedMatches != null) {
             return new ResponseEntity<>(savedMatches, HttpStatus.OK);
         }
@@ -43,11 +44,12 @@ public class MatchesApiController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteMatches(@RequestParam("name") String name,
-            @RequestParam("Age") int age,
-            @RequestParam("Location") String location,
-            @RequestParam("Pronouns") String pronouns) {
-        List<Matches> matchesToDelete = repository.findByNameAndAgeAndLocationAndPronouns(name, age,
-                location, pronouns);
+            @RequestParam("age") int age,
+            @RequestParam("location") String location,
+            @RequestParam("pronouns") String pronouns,
+            @RequestParam("socials") String socials) {
+        List<Matches> matchesToDelete = repository.findByNameAndAgeAndLocationAndPronounsAndSocials(name, age,
+                location, pronouns, socials);
         if (!matchesToDelete.isEmpty()) {
             repository.deleteAll(matchesToDelete);
             return new ResponseEntity<>("match(es) deleted successfully", HttpStatus.OK);

@@ -16,8 +16,9 @@ public interface MatchesJpaRepository extends JpaRepository<Matches, Long> {
     @Query(value = "SELECT * FROM Practice p WHERE p.problem LIKE ?1 or p.Tags LIKE ?1", nativeQuery = true)
     List<Matches> findByNameorLocation(String term);
 
-    List<Matches> findByNameAndAgeAndLocationAndPronouns(String name, int age, String location, String pronouns);
+    List<Matches> findByNameAndAgeAndLocationAndPronounsAndSocials(String name, int age, String location,
+            String pronouns, String socials);
 
-   //  @Query(value = "SELECT max(id) FROM Practice")
+    // @Query(value = "SELECT max(id) FROM Practice")
     // long getMaxId();
 }
