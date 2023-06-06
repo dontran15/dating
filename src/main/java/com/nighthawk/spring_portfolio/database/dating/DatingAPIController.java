@@ -106,5 +106,4 @@ public class DatingAPIController {
 
         return new ResponseEntity<>(datingRepository.findAllByProfileDetail(detail), HttpStatus.OK);
     }
-
 }

@@ -31,6 +31,8 @@ public class DatingProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String pictureUrl;
+
     @JoinColumn(name = "person_id")
     @OneToOne(cascade = CascadeType.ALL)
     private Person person;
@@ -41,17 +43,13 @@ public class DatingProfile {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ProfileDetail> profileDetail;
 
-    public DatingProfile(Person person) {
+    public DatingProfile(Person person, String pictureUrl) {
         this.person = person;
+        this.pictureUrl = pictureUrl;
         this.profileDetail = new ArrayList<>();
     }
 
     public void addProfile(ProfileDetail detail) {
         profileDetail.add(detail);
     }
-
-    // @Override
-    // public String toString() {
-    // return "{ \"id\": " + id + p + " }";
-    // }
 }

@@ -87,10 +87,13 @@ public class PersonApiController {
      * 
      */
     @PostMapping("/post")
-    public ResponseEntity<Object> postPerson(@RequestParam("email") String email,
-            @RequestParam("password") String password,
-            @RequestParam("name") String name,
-            @RequestParam("dob") String dobString) {
+    public ResponseEntity<Object> postPerson(@RequestBody final Map<String, Object> map) {
+
+        String email = (String) map.get("email");
+        String password = (String) map.get("password");
+        String name = (String) map.get("name");
+        String dobString = (String) map.get("dobString");
+        String pictureUrl = (String) map.get("pictureUrl");
 
         Date dob;
 
@@ -108,7 +111,7 @@ public class PersonApiController {
         Person person = new Person(email, password, name, dob, repository.findRole("ROLE_USER"));
         repository.save(person);
 
-        DatingProfile profile = new DatingProfile(person);
+        DatingProfile profile = new DatingProfile(person, pictureUrl);
         datingRepository.save(profile);
 
         return new ResponseEntity<>(email + " is created successfully", HttpStatus.CREATED);

@@ -35,13 +35,6 @@ public class ProfileDetail {
         this.detail = detail;
     }
 
-    // TODO: Format as JSON to send for training
-    // @Override
-    // public String toString() {
-    // return "{ \"id\": " + id + ", \"type\": " + type + ", \"detail\": " + detail
-    // + " }";
-    // }
-
     public ProfileDetail(String type) {
         this.detail = null;
 
